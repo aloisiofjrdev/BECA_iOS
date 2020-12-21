@@ -60,6 +60,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         } else {
             celula.accessoryType = .none
+            
+            let item = itens[indexPath.row]
+            if let position = ItensSelecionados.index(of: item){
+                ItensSelecionados.remove(at: position)
+            }
         }
         
    
@@ -77,7 +82,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return
         }
         
-        let refeicao = Refeicao(nome: nomeDaRefeicao, felicidade: felicidade, itens: [ItensSelecionados])
+        let refeicao = Refeicao(nome: nomeDaRefeicao, felicidade: felicidade, itens: ItensSelecionados)
         
         refeicao.itens = ItensSelecionados
         
