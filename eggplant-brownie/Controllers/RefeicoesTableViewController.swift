@@ -42,6 +42,10 @@ class RefeicoesTableViewController: UITableViewController, AdicionaRefeicaoDeleg
             guard let indexPath =  tableView.indexPath(for: celula) else {return}
             let refeicao = refeicoes[indexPath.row]
             
+            func removeRefeicao(alerta: UIAlertAction){
+                print("remover refeicao: \(refeicao.nome)")
+            }
+            
             let alerta = UIAlertController(title: refeicao.nome, message: refeicao.detalhes(), preferredStyle: .alert)
             let botaoCancelar = UIAlertAction(title: "cancelar", style: .cancel)
             alerta.addAction(botaoCancelar)
@@ -56,9 +60,6 @@ class RefeicoesTableViewController: UITableViewController, AdicionaRefeicaoDeleg
         }
     }
     
-    func removeRefeicao(alerta: UIAlertAction){
-        print("remover refeicao")
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
