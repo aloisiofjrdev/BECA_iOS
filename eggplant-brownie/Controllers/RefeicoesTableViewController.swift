@@ -12,8 +12,7 @@ class RefeicoesTableViewController: UITableViewController, AdicionaRefeicaoDeleg
     
     var refeicoes = [Refeicao(nome: "Macarrao", felicidade: 4),
                      Refeicao(nome: "Pizza", felicidade: 4),
-                     Refeicao(nome: "Comida Japonesa", felicidade: 5),
-                     Refeicao(nome: "Macarronada", felicidade: 5)]
+                     Refeicao(nome: "Comida Japonesa", felicidade: 5)]
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return refeicoes.count
@@ -41,16 +40,14 @@ class RefeicoesTableViewController: UITableViewController, AdicionaRefeicaoDeleg
             let celula = gesture.view as! UITableViewCell
             guard let indexPath =  tableView.indexPath(for: celula) else {return}
             let refeicao = refeicoes[indexPath.row]
-            
-            func removeRefeicao(alerta: UIAlertAction){
-                print("remover refeicao: \(refeicao.nome)")
-            }
-            
             let alerta = UIAlertController(title: refeicao.nome, message: refeicao.detalhes(), preferredStyle: .alert)
             let botaoCancelar = UIAlertAction(title: "cancelar", style: .cancel)
             alerta.addAction(botaoCancelar)
-            
-            let botaoRemover = UIAlertAction(title: "remover", style: .destructive, handler: removeRefeicao)
+            let botaoRemover = UIAlertAction(title: "remover", style: .destructive, handler: {
+                alerta in
+                self.refeicoes.remove(at: indexPath.row)
+                self.tableView.reloadData()
+            })
             
             alerta.addAction(botaoRemover)
             
