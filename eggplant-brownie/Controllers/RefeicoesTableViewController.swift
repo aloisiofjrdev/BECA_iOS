@@ -40,20 +40,13 @@ class RefeicoesTableViewController: UITableViewController, AdicionaRefeicaoDeleg
             let celula = gesture.view as! UITableViewCell
             guard let indexPath =  tableView.indexPath(for: celula) else {return}
             let refeicao = refeicoes[indexPath.row]
-            let alerta = UIAlertController(title: refeicao.nome, message: refeicao.detalhes(), preferredStyle: .alert)
-            let botaoCancelar = UIAlertAction(title: "cancelar", style: .cancel)
-            alerta.addAction(botaoCancelar)
-            let botaoRemover = UIAlertAction(title: "remover", style: .destructive, handler: {
-                alerta in
+            
+            RemoveRefeicaoViewController(controller: self).exibe(refeicao, handler: {
+                alert in
                 self.refeicoes.remove(at: indexPath.row)
                 self.tableView.reloadData()
             })
-            
-            alerta.addAction(botaoRemover)
-            
-            present(alerta, animated: true, completion: nil)
-            
-            
+
         }
     }
     
